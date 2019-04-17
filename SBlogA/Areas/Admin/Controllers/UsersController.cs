@@ -7,20 +7,13 @@ using System.Web.Mvc;
 
 namespace SBlogA.Areas.Admin.Controllers
 {
-    [Authorize(Roles="admin")]
-    public class PostsController : Controller
+    [Authorize(Roles ="admin")]
+    public class UsersController : Controller
     {
-        [SelectedTabAttribute("a")]
+        [SelectedTabAttribute("c")]
         public ActionResult Index()
         {
             return View();
         }
-
-        [SelectedTabAttribute("b")]
-        public ActionResult List()
-        {
-            return View();
-        }
-
     }
 }

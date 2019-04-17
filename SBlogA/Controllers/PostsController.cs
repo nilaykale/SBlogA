@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SBlogA.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +9,7 @@ namespace SBlogA.Controllers
 {
     public class PostsController : Controller
     {
-        // GET: Posts
+        [SelectedTabAttribute("post list")]
         public ActionResult Index()
         {
             return View();

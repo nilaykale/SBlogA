@@ -1,0 +1,40 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_Layout</title>
+    @Styles.Render("~/admin/styles")
+</head>
+<body>
+    @helper SelectedTabClass(string tabName) { 
+        if (ViewBag.SelectedTab == tabName)
+        {
+            @:active
+        }
+    }
+
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li class="@SelectedTabClass("a")">
+                @Html.ActionLink("Post Index", "Index", "Posts", new { area = "Admin" }, "")
+            </li>
+            <li class="@SelectedTabClass("b")">
+                @Html.ActionLink("Post List", "List", "Posts", new { area = "Admin" }, "")
+            </li>
+            <li class="@SelectedTabClass("c")">
+                @Html.ActionLink("User List", "Index", "Users", new { area = "Admin" }, "")
+            </li>
+            <li class="pull-right">
+                @Html.RouteLink("Back To Home Page", "Home")
+            </li>
+        </ul>
+        @RenderBody()
+    </div>
+    
+    
+    @RenderSection("Scripts", false)
+</body>
+</html>
