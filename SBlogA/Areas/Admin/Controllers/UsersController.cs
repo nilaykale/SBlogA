@@ -1,4 +1,7 @@
-﻿using SBlogA.Infrastructure;
+﻿using NHibernate.Linq;
+using SBlogA.Areas.Admin.ViewModels;
+using SBlogA.Infrastructure;
+using SBlogA.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +16,11 @@ namespace SBlogA.Areas.Admin.Controllers
         [SelectedTabAttribute("c")]
         public ActionResult Index()
         {
-            return View();
+            return View(new UsersIndex() {
+                Users=Database.Session.Query<User>().ToList()
+            });
         }
     }
 }
+
+//Database.Session.Query<User>().ToList() = select * from users
