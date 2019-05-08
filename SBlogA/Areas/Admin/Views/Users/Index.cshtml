@@ -1,9 +1,35 @@
 ﻿@model SBlogA.Areas.Admin.ViewModels.UsersIndex
 
-<h1>Users</h1>
+<div class="btn-toolbar">
+    <a href="@Url.Action("New")" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i>Create User</a>
+</div>
 
-@foreach(var user in Model.Users)
-{
-    <p>@user.Username</p>
-}
-
+<table class="table table-striped"> 
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Roles</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+                <td>{ROLES}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Edit</a>
+                        <a href="#" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-lock"></i>Reset Password</a>
+                        <a href="#" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

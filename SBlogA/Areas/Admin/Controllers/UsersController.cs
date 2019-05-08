@@ -20,6 +20,42 @@ namespace SBlogA.Areas.Admin.Controllers
                 Users=Database.Session.Query<User>().ToList()
             });
         }
+
+        public ActionResult New()
+        {
+            return View(new UsersNew());
+        }
+
+        [HttpPost]
+        public ActionResult New(UsersNew formData)
+        {
+            
+            if (Database.Session.Query<User>().Any(u => u.Username == formData.Username))
+            {
+                ModelState.AddModelError("Username", "Username must be unique");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(formData);
+            }
+
+            var user = new User()
+            {
+                Username = formData.Username,
+                PasswordHash = formData.Password,
+                Email = formData.Email
+            };
+
+            user.SetPassword(formData.Password);
+            Database.Session.Save(user); //insert into Users (USername,password_hash,email) values ....
+
+            return RedirectToAction("Index");
+            
+
+        }
+
+
     }
 }
 

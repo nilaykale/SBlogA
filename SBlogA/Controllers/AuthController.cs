@@ -1,4 +1,6 @@
-﻿using SBlogA.ViewModels;
+﻿using NHibernate.Linq;
+using SBlogA.Models;
+using SBlogA.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +22,19 @@ namespace SBlogA.Controllers
         public ActionResult Login(AuthLogin formData,string returnUrl)
         {
 
+
+            var user = Database.Session.Query<User>().FirstOrDefault(p => p.Username == formData.Username);
+
+            if (user==null || user.CheckPassword(formData.Password))
+            {
+                ModelState.AddModelError("Username", "Username or password is incorrect");
+            } 
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
+            
 
             FormsAuthentication.SetAuthCookie(formData.Username, true);
 
