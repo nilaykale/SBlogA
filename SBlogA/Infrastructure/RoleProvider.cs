@@ -36,7 +36,7 @@ namespace SBlogA.Infrastructure
 
         public override string[] GetRolesForUser(string username)
         {
-            return new string[] {"admin"};
+            return Auth.User.Roles.Select(p => p.Name).ToArray();
         }
 
         public override string[] GetUsersInRole(string roleName)

@@ -22,6 +22,11 @@ namespace SBlogA.App_Start
             );
 
 
+            bundles.Add(new ScriptBundle("~/admin")
+                .Include("~/Areas/Admin/Scripts/Forms.js")
+                .Include("~/content/js/jquery-3.4.1.min.js")
+            );
+
         }
 
 

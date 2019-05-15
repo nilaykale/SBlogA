@@ -21,12 +21,12 @@
                 <td>@user.Id</td>
                 <td>@user.Username</td>
                 <td>@user.Email</td>
-                <td>{ROLES}</td>
+                <td>@String.Join(", ",user.Roles.Select(p=>p.Name))</td>
                 <td>
                     <div class="btn-group">
-                        <a href="#" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Edit</a>
-                        <a href="#" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-lock"></i>Reset Password</a>
-                        <a href="#" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>Delete</a>
+                        <a href="@Url.Action("Edit",new {user.Id })" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>Edit</a>
+                        <a href="@Url.Action("ResetPassword",new { user.Id})" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-lock"></i>Reset Password</a>
+                        <a href="@Url.Action("Delete",new { user.Id})" data-post="Are you sure you want to delete @user.Username" class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i>Delete</a>
                     </div>
                 </td>
             </tr>
