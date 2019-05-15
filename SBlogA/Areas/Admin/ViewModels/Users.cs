@@ -27,11 +27,14 @@ namespace SBlogA.Areas.Admin.ViewModels
 
     public class UsersEdit
     {
+       
+
         [Required, MaxLength(128)]
         public string Username { get; set; }
 
         [Required, DataType(DataType.EmailAddress), MaxLength(256)]
         public string Email { get; set; }
+
         public IList<RoleCheckBox> Roles { get; set; }
     }
 

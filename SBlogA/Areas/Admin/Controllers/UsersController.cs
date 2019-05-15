@@ -89,7 +89,7 @@ namespace SBlogA.Areas.Admin.Controllers
 
             user.SetPassword(formData.Password);
             Database.Session.Save(user); //insert into Users (USername,password_hash,email) values ....
-
+            Database.Session.Flush();
             return RedirectToAction("Index");
             
 
@@ -105,10 +105,17 @@ namespace SBlogA.Areas.Admin.Controllers
             }
 
 
-            return View(new UsersEdit() {
-                Username=user.Username,
-                Email=user.Email
-            });
+            return View(
+                new UsersEdit() {
+                    Username=user.Username,
+                    Email=user.Email,
+                    Roles=Database.Session.Query<Role>().Select(role=> new RoleCheckBox() {
+                        Id=role.Id,
+                        Name=role.Name,
+                        IsChecked=user.Roles.Contains(role)
+                    }).ToList()
+                }
+            );
         }
 
         [HttpPost]
@@ -134,6 +141,7 @@ namespace SBlogA.Areas.Admin.Controllers
 
             user.Username = formData.Username;
             user.Email = formData.Email;
+            SyncRoles(formData.Roles, user.Roles);
             Database.Session.Update(user); //insert into Users (USername,password_hash,email) values ....
             Database.Session.Flush();
             return RedirectToAction("Index");
